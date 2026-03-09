@@ -27,33 +27,73 @@ const Documentation = () => {
             </div>
 
             <div className="doc-section">
-                <h3>2. Configuration</h3>
-                <p>Guardrail is driven by <code>~/.guardrail/config.yaml</code>. To scaffold this interactively, run:</p>
-                <pre><code>guardrail create-config   # Or use alias: guardrail cc</code></pre>
-                <p>To dynamically update your environments via terminal dropdowns:</p>
-                <pre><code>guardrail set-context     # Or use alias: guardrail sc</code></pre>
+                <h3>2. Initialization & Configuration</h3>
+                <p>Guardrail relies on a central configuration file located at <code>~/.guardrail/config.yaml</code>. Use these commands to manage it.</p>
+
+                <div className="command-block">
+                    <h4>Create Base Config</h4>
+                    <pre><code>guardrail create-config</code></pre>
+                    <p><strong>Alias:</strong> <code>guardrail cc</code></p>
+                    <p>Scaffolds a fresh configuration file if one doesn't exist. It generates a template populated with standard "dev", "staging", and "prod" environments as a starting point. This is the first command you should run after installation.</p>
+                </div>
+
+                <div className="command-block">
+                    <h4>Direct Edit</h4>
+                    <pre><code>guardrail edit-config</code></pre>
+                    <p>Opens <code>~/.guardrail/config.yaml</code> directly in your system's default terminal text editor (uses <code>$EDITOR</code>, falling back to <code>vim</code> or <code>nano</code>). Use this if you prefer writing YAML directly.</p>
+                </div>
             </div>
 
             <div className="doc-section">
-                <h3>3. Core Commands</h3>
+                <h3>3. Environment Management</h3>
+                <p>These commands handle the creation, mutation, and selection of your cloud profiles.</p>
+
                 <div className="command-block">
-                    <h4>Environment Switching</h4>
-                    <pre><code>guardrail use [env_name]</code></pre>
-                    <p>Switches your active Kubernetes context and Cloud Provider Profile automatically.</p>
+                    <h4>Interactive Configuration</h4>
+                    <pre><code>guardrail set-context</code></pre>
+                    <p><strong>Alias:</strong> <code>guardrail sc</code></p>
+                    <p>Launches an interactive dropdown UI in your terminal. This wizard walks you through creating a brand new environment profile, or safely mutating an existing one, asking for attributes like AWS Profiles, Kubeconfig Contexts, and whether the environment represents Production.</p>
                 </div>
+
+                <div className="command-block">
+                    <h4>Switching Environments</h4>
+                    <pre><code>guardrail use [env_name]</code></pre>
+                    <p><strong>Example:</strong> <code>guardrail use prod-eu-west</code></p>
+                    <p>Updates Guardrail's internal active state to point to the targeted environment. When you use this natively, it relies on your explicit shell alias to inject those profile variables into your terminal session.</p>
+                </div>
+            </div>
+
+            <div className="doc-section">
+                <h3>4. Execution & Safety</h3>
+                <p>The core philosophy of Guardrail is preventing destructive actions via the shell wrapper.</p>
 
                 <div className="command-block">
                     <h4>Safety Interceptor (Production Protection)</h4>
-                    <pre><code>guardrail run -- [command]</code></pre>
-                    <p>Executes a shell command beneath the active environment profile.</p>
-                    <p><strong>How the Interceptor Works:</strong> If your <code>~/.guardrail/config.yaml</code> contains <code>is_production: true</code> for the active context, Guardrail actively scans your command. If it detects high-risk keywords (like <code>delete</code>, <code>apply</code>, <code>destroy</code>, <code>uninstall</code>), it instantly halts execution.</p>
-                    <p>It then prompts a high-visibility terminal warning, requiring you to manually type the exact, complex name of the cluster you are about to mutate before it lets the command through.</p>
+                    <pre><code>guardrail run -- [command...]</code></pre>
+                    <p><strong>Example:</strong> <code>guardrail run -- kubectl delete pods --all</code></p>
+                    <p>Executes a shell command beneath the active environment profile. Guardrail spins up a secure child-process with the exact Kubeconfig and AWS/GCP profiles injected from your YAML file.</p>
+                    <br />
+                    <p><strong>How the Interceptor Works:</strong> If your active context has <code>is_production: true</code>, Guardrail scans the command arguments before they ever reach the operating system. If it detects high-risk keywords (<code>delete</code>, <code>apply</code>, <code>destroy</code>, <code>uninstall</code>), it halts execution immediately.</p>
+                    <br />
+                    <p>It then flashes a high-visibility terminal warning (red background), forcing you to type the <strong>exact, case-sensitive name</strong> of the cluster you are about to mutate. If you make a typo, the process dies instantly, saving the cluster.</p>
+                </div>
+            </div>
+
+            <div className="doc-section">
+                <h3>5. Shell Integration</h3>
+                <p>For the seamless context-switching to work in your parent bash/ZSH terminal, Guardrail hooks into the prompt.</p>
+
+                <div className="command-block">
+                    <h4>Profile Exporting</h4>
+                    <pre><code>eval $(guardrail env)</code></pre>
+                    <p><strong>Alias Setup (Recommended):</strong> Add <code>alias gr='guardrail use "$1" &amp;&amp; eval $(guardrail env)'</code> to your <code>~/.zshrc</code> or <code>~/.bashrc</code>.</p>
+                    <p>Go binaries run as child processes and cannot natively change your terminal's environment variables. The <code>env</code> command prints bash-compatible `export` statements. Wrapping it in an <code>eval</code> directly modifies your active session, linking your shell seamlessly to the Guardrail context.</p>
                 </div>
 
                 <div className="command-block">
-                    <h4>Shell Profile Exporting</h4>
-                    <pre><code>eval $(guardrail env)</code></pre>
-                    <p>Safely exports the Go child-process variables (like <code>AWS_PROFILE</code> or <code>KUBECONFIG_CONTEXT</code>) to your parent bash/zsh profile. Best used by creating an alias in your shell rc file: <code>alias gr='guardrail use $1 && eval $(guardrail env)'</code></p>
+                    <h4>PS1 Terminal Prompt Integration</h4>
+                    <pre><code>guardrail prompt</code></pre>
+                    <p>Prints the name of the currently active environment. You can inject this directly into your terminal's PS1 variable, or your Starship/Zsh theme, to always have a visual indicator of where you are pointing.</p>
                 </div>
             </div>
         </section>
