@@ -91,9 +91,20 @@ const Documentation = () => {
                 </div>
 
                 <div className="command-block">
-                    <h4>PS1 Terminal Prompt Integration</h4>
+                    <h4>Terminal Prompt Integration (Inline View)</h4>
                     <pre><code>guardrail prompt</code></pre>
-                    <p>Prints the name of the currently active environment. You can inject this directly into your terminal's PS1 variable, or your Starship/Zsh theme, to always have a visual indicator of where you are pointing.</p>
+                    <p>Prints a highly-visible badge (e.g., <strong style={{ color: "red" }}>[PROD | my-cluster]</strong>) of your active environment. To have this permanently visible inline on your terminal screen like the screenshot above, you must integrate it into your shell theme.</p>
+
+                    <h5 style={{ margin: '16px 0 8px', color: 'var(--text-primary)' }}>For standard ZSH or Bash:</h5>
+                    <p style={{ marginBottom: '8px' }}>Add this to your <code>~/.zshrc</code> or <code>~/.bashrc</code> to prepend it to your prompt:</p>
+                    <pre><code>export PS1="\$(guardrail prompt) $PS1"</code></pre>
+
+                    <h5 style={{ margin: '16px 0 8px', color: 'var(--text-primary)' }}>For Starship (starship.rs):</h5>
+                    <p style={{ marginBottom: '8px' }}>Add a custom module to your <code>~/.config/starship.toml</code>:</p>
+                    <pre><code>[custom.guardrail]
+                        command = "guardrail prompt"
+                        when = "test -f ~/.guardrail/config.yaml"
+                        format = "$output"</code></pre>
                 </div>
             </div>
         </section>
