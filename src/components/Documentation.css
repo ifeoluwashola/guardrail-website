@@ -59,3 +59,21 @@ p code {
     margin-bottom: 12px;
     font-size: 1.1rem;
 }
+
+@media (max-width: 768px) {
+    .docs-container {
+        padding: 20px 0 60px;
+    }
+
+    .docs-container h2 {
+        font-size: 2rem;
+    }
+
+    .doc-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .command-block {
+        padding: 16px;
+    }
+}

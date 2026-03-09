@@ -53,3 +53,17 @@
     line-height: 1.6;
     font-size: 1rem;
 }
+
+@media (max-width: 768px) {
+    .how-it-works {
+        padding: 4rem 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
