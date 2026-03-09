@@ -1,0 +1,147 @@
+.releases-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: var(--text-primary);
+}
+
+.releases-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.releases-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.releases-loading,
+.releases-error {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.releases-error {
+    color: var(--accent-red);
+}
+
+.releases-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.release-card {
+    padding: 2rem;
+    border-left: 4px solid var(--accent-cyan);
+}
+
+.release-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.release-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+}
+
+.release-header a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-size: 1.8rem;
+}
+
+.release-header a:hover {
+    text-decoration: underline;
+}
+
+.release-date {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.badge.prerelease {
+    background: rgba(255, 165, 0, 0.2);
+    color: orange;
+}
+
+.release-body {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.release-assets h4 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.release-assets ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.release-assets li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.release-assets li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.release-assets a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+}
+
+.release-assets a:hover {
+    color: var(--accent-cyan);
+}
+
+.asset-size {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.more-assets a {
+    color: var(--text-secondary);
+    font-style: italic;
+}
