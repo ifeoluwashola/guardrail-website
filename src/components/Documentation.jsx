@@ -10,20 +10,35 @@ const Documentation = () => {
                 <h3>1. Installation</h3>
                 <p>Guardrail is distributed natively across all major platforms securely via GoReleaser. Pick your package manager:</p>
 
-                <h4 style={{ marginTop: '16px', marginBottom: '8px' }}>macOS / Linux (Homebrew)</h4>
-                <pre style={{ marginBottom: '16px' }}><code>brew tap ifeoluwashola/homebrew-tap
-                    brew install guardrail</code></pre>
+                <div className="command-block">
+                    <h4>macOS / Linux (Homebrew)</h4>
+                    <p>First, add the custom tap repository to your local Homebrew:</p>
+                    <pre><code>brew tap ifeoluwashola/homebrew-tap</code></pre>
+                    <p style={{ marginTop: '12px' }}>Then, install the CLI:</p>
+                    <pre><code>brew install guardrail</code></pre>
+                </div>
 
-                <h4 style={{ marginBottom: '8px' }}>Debian / Ubuntu (APT)</h4>
-                <pre style={{ marginBottom: '16px' }}><code># Download .deb from GitHub Releases
-                    curl -LO https://github.com/ifeoluwashola/guardrail/releases/latest/download/guardrail_Linux_x86_64.deb
-                    sudo dpkg -i guardrail_Linux_x86_64.deb</code></pre>
+                <div className="command-block">
+                    <h4>Debian / Ubuntu (APT)</h4>
+                    <p>First, download the latest <code>.deb</code> package directly from GitHub Releases:</p>
+                    <pre><code>curl -LO https://github.com/ifeoluwashola/guardrail/releases/latest/download/guardrail_Linux_x86_64.deb</code></pre>
+                    <p style={{ marginTop: '12px' }}>Next, install the downloaded package using <code>dpkg</code>:</p>
+                    <pre><code>sudo dpkg -i guardrail_Linux_x86_64.deb</code></pre>
+                </div>
 
-                <h4 style={{ marginBottom: '8px' }}>Windows (Scoop)</h4>
-                <pre style={{ marginBottom: '16px' }}><code>scoop bucket add guardrail https://github.com/ifeoluwashola/scoop-bucket.git
-                    scoop install guardrail</code></pre>
+                <div className="command-block">
+                    <h4>Windows (Scoop)</h4>
+                    <p>First, register the custom Scoop bucket URL:</p>
+                    <pre><code>scoop bucket add guardrail https://github.com/ifeoluwashola/scoop-bucket.git</code></pre>
+                    <p style={{ marginTop: '12px' }}>Then, install the application:</p>
+                    <pre><code>scoop install guardrail</code></pre>
+                </div>
 
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>*Alternatively, you can compile from source locally using <code>go install github.com/ifeoluwashola/guardrail/...</code></p>
+                <div className="command-block">
+                    <h4>Compile from Source</h4>
+                    <p>If you have Go installed, you can compile and install it globally using standard Go tools:</p>
+                    <pre><code>go install github.com/ifeoluwashola/guardrail@latest</code></pre>
+                </div>
             </div>
 
             <div className="doc-section">
