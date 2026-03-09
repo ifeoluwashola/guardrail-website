@@ -71,6 +71,13 @@ const Documentation = () => {
                 </div>
 
                 <div className="command-block">
+                    <h4>List Environments</h4>
+                    <pre><code>guardrail list-contexts</code></pre>
+                    <p><strong>Alias:</strong> <code>guardrail lc</code></p>
+                    <p>Prints a clean, formatted list of every environment you have configured in your <code>~/.guardrail/config.yaml</code> file. It clearly highlights your currently active environment and explicitly flags namespaces marked as Production.</p>
+                </div>
+
+                <div className="command-block">
                     <h4>Switching Environments</h4>
                     <pre><code>guardrail use [env_name]</code></pre>
                     <p><strong>Example:</strong> <code>guardrail use prod-eu-west</code></p>
